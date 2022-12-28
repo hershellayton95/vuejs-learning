@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50vh;
+            height: 50vh;
+            background-color: green;
+        }
+
+        .box-2{
+            width: 50vh;
+            height: 50vh;
+            background-color: red;
+        }
+
+        .box-2{
+            width: 50vh;
+            height: 50vh;
+            background-color: blue;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        {{ message }}
+        <input v-model="message">
+        <hr/>
+        <div v-if="isVisible" class="box"></div>
+        <div v-else-if="isVisible2" class="box-2"></div>
+        <div v-else="isVisible3" class="box-3"></div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'Hello Vue!',
+                isVisible: true,
+                isVisible2: true,
+                isVisible3: true
+            }
+        }
+    });
+    app.mount('#app')
+</script>
+</html>
