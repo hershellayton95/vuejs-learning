@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50vh;
+            height: 50vh;
+            background-color: green;
+        }
+
+        .box-2{
+            width: 50vh;
+            height: 50vh;
+            background-color: red;
+        }
+
+        .box-2{
+            width: 50vh;
+            height: 50vh;
+            background-color: blue;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <button v-on:click.left="count++">ClickLeft : Add 1</button>
+        <button @click.alt.left="count--">Alt+ClickLeft : remove 1</button>
+        <button @click="reset">Reset</button>
+        <p>Count is: {{ count }}</p>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            reset(){
+                this.count = 0;
+            }
+        }
+    });
+    app.mount('#app')
+</script>
+</html>
