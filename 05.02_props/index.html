@@ -45,16 +45,19 @@
         template:`
             <form @submit.prevent="hadleSubmit">
                 <h1>{{title}}</h1>
-                <input type="email" v-model="email"/>
-                <input type="password" v-model="password"/>
+                <custom-input v-model="email" :label="emailLabel"/>
+                <custom-input v-model="password" :label="passwordLabel"/>
                 <button>Login</button>
             </form>
         `,
+        components:["custom-input"],
         data(){
             return {
                 title: "Login Form",
                 email: "",
-                password: ""
+                password: "",
+                emailLabel: "Email",
+                passwordLabel: "Password"
             }
         },
         methods:{
@@ -63,6 +66,26 @@
             }
         }
     })
+    app.component('custom-input',{
+        template: `
+        <label>
+            {{ label }}
+            <input type="text" v-model="inputValue"/>
+        </label>
+        `,
+        props:["label", "modelValue"],
+        computed: {
+            inputValue:{
+                get(){
+                    return this.modelValue;
+                },
+                set(value){
+                    this.$emit('update:modelValue',value)
+                }
+            }
+        }
+    })
+
     app.mount('#app')
 </script>
 </html>
