@@ -7,25 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .box{
+        .box {
             width: 50vh;
             height: 50vh;
             background-color: green;
         }
 
-        .box-2{
+        .box-2 {
             width: 50vh;
             height: 50vh;
             background-color: red;
         }
 
-        .box-2{
+        .box-2 {
             width: 50vh;
             height: 50vh;
             background-color: blue;
         }
 
-        [v-cloak]{
+        [v-cloak] {
             display: none;
         }
 
@@ -41,46 +41,53 @@
 
 <script>
     const app = Vue.createApp({});
-    app.component('login-form',{
-        template:`
+    app.component('login-form', {
+        template: `
             <form @submit.prevent="hadleSubmit">
                 <h1>{{title}}</h1>
-                <custom-input v-model="email" :label="emailLabel"/>
-                <custom-input v-model="password" :label="passwordLabel"/>
+                <custom-input v-for="(item, i) in inputs" :key="i+item" :typeInput="item.type" :label="item.label" v-model="item.value"/>
                 <button>Login</button>
             </form>
         `,
-        components:["custom-input"],
-        data(){
+        components: ["custom-input"],
+        data() {
             return {
                 title: "Login Form",
-                email: "",
-                password: "",
-                emailLabel: "Email",
-                passwordLabel: "Password"
+                inputs: [
+                    {
+                        type: "text",
+                        label: "email",
+                        value: ""
+                    },
+                    {
+                        type: "password",
+                        label: "password",
+                        value: ""
+                    }
+                ]
             }
         },
-        methods:{
-            hadleSubmit(){
-                console.log(this.email, this. password);
+        methods: {
+            hadleSubmit() {
+                console.log(this.email, this.password);
             }
         }
     })
-    app.component('custom-input',{
+    app.component('custom-input', {
         template: `
         <label>
             {{ label }}
-            <input type="text" v-model="inputValue"/>
+            <input :type="typeInput" v-model="inputValue"/>
         </label>
         `,
-        props:["label", "modelValue"],
+        props: ["label", "typeInput", "modelValue"],
         computed: {
-            inputValue:{
-                get(){
+            inputValue: {
+                get() {
                     return this.modelValue;
                 },
-                set(value){
-                    this.$emit('update:modelValue',value)
+                set(value) {
+                    this.$emit('update:modelValue', value)
                 }
             }
         }
@@ -88,4 +95,5 @@
 
     app.mount('#app')
 </script>
+
 </html>
