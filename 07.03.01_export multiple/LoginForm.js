@@ -5,14 +5,14 @@ const LoginForm = {
     template: `
             <form @submit.prevent="hadleSubmit">
                 <h1>{{title}}</h1>
-                <Hello/>
+                <hello/>
                 <custom-input v-for="(item, i) in inputs" :key="i+item" :typeInput="item.type" :label="item.label" v-model="item.value"/>
                 <button>Login</button>
             </form>
         `,
     components: {
         "custom-input": CustomInput,
-        Hello: Hello
+        hello: Hello
     },
     data() {
         return {

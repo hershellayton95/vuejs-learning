@@ -1,7 +1,7 @@
-const Hello = {
+const hello = {
     template: `
     <p>Hello</p>
     `
 }
 
-export default Hello;
+export default hello;
