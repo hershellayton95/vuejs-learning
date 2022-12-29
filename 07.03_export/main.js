@@ -1,3 +1,4 @@
+const app = Vue.createApp({});
 const LoginForm = {
     template: `
             <form @submit.prevent="hadleSubmit">
@@ -31,4 +32,27 @@ const LoginForm = {
     }
 };
 
-export default LoginForm;
+const CustomInput = {
+    template: `
+        <label>
+            {{ label }}
+            <input :type="typeInput" v-model="inputValue"/>
+        </label>
+        `,
+    props: ["label", "typeInput", "modelValue"],
+    computed: {
+        inputValue: {
+            get() {
+                return this.modelValue;
+            },
+            set(value) {
+                this.$emit('update:modelValue', value);
+            }
+        }
+    }
+};
+
+app.component('login-form', LoginForm)
+app.component('custom-input', CustomInput)
+
+app.mount('#app');
